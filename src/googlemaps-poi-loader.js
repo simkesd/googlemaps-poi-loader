@@ -4,6 +4,7 @@ var gMap = (function() {
 
     };
     var kmlLayers = [];
+    var filterClickCallback;
 
     /**
      * Initializes the map and calls the function that creates polylines.
@@ -17,13 +18,18 @@ var gMap = (function() {
 
     function setEvents() {
         $(filters).on('click', function() {
-            clearPreviousLayers();
+            if(!onLayerChangeKeepState) {
+                clearPreviousLayers();
+            }
             loadKmlLayer($(this).data('layerUrl'), map);
+            if(filterClickCallback !== undefined) {
+                filterClickCallback();
+            }
         });
     }
 
     function clearPreviousLayers() {
-        $.each( kmlLayers, function( key, value ) {
+        $.each(kmlLayers, function(key, value) {
             value.layerInstance.setMap(null);
         });
     }
@@ -55,6 +61,8 @@ var gMap = (function() {
     var constructor = function Podcast(data) {
         map = data.map;
         filters = data.filters;
+        filterClickCallback = data.filterClickCallback
+        onLayerChangeKeepState = data.onLayerChangeKeepState || false;
         setEvents();
     };
 

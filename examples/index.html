@@ -23,7 +23,10 @@
 
             var gm = new gMap({
                 map: map,
-                filters: $('ul.filters li')
+                filters: $('ul.filters li'),
+                filterClickCallback: function() {
+                    console.log('filterClickCallback');
+                }
             });
 
             gm.loadAll();
