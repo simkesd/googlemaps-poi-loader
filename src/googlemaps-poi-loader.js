@@ -11,7 +11,6 @@ var gMap = (function() {
      */
     function loadAll() {
         $.each( filters, function( key, value ) {
-            console.log($(value).data('layerUrl'));
             loadKmlLayer($(value).data('layerUrl'), map);
         });
     }
@@ -59,6 +58,12 @@ var gMap = (function() {
 
 
     var constructor = function Podcast(data) {
+        if(data.map === undefined) {
+            throw new Error('Google map object must be passed as property of data parameter.')
+        }
+        if(data.filters === undefined) {
+            throw new Error('Array of DOM elements containing data-layer-url attribute must be passed as property of data parameter.')
+        }
         map = data.map;
         filters = data.filters;
         filterClickCallback = data.filterClickCallback
