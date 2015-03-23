@@ -3,31 +3,29 @@ var gMap = (function() {
     var filters = {
 
     };
-    var gyms = 'http://happyfist.co/pois/pois/POI/gyms.kml';
-    var hotels = 'http://happyfist.co/pois/pois/POI/hotels.kml';
-    var artMuseums = 'http://happyfist.co/pois/pois/POI/artMuseums.kml';
-    var nightlife = 'http://happyfist.co/pois/pois/POI/nightlife.kml';
-    var restaurants = 'http://happyfist.co/pois/pois/POI/restaurants.kml';
-    var schools = 'http://happyfist.co/pois/pois/POI/schools.kml';
-    var shopAndSpecialities = 'http://happyfist.co/pois/pois/POI/shop-and-specialities.kml';
-    var transit = 'http://happyfist.co/pois/pois/POI/transit.kml';
+    var kmlLayers = [];
 
     /**
      * Initializes the map and calls the function that creates polylines.
      */
-    function initialize() {
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: new google.maps.LatLng(40.751077, -73.945135),
-            zoom: 13,
-            mapTypeId: google.maps.MapTypeId.TERRAIN
+    function loadAll() {
+        $.each( filters, function( key, value ) {
+            console.log($(value).data('layerUrl'));
+            loadKmlLayer($(value).data('layerUrl'), map);
         });
+    }
 
-        loadKmlLayer(gyms, map);
-        loadKmlLayer(hotels, map);
-        loadKmlLayer(artMuseums, map);
-        loadKmlLayer(nightlife, map);
-        loadKmlLayer(restaurants, map);
-        loadKmlLayer(schools, map);
+    function setEvents() {
+        $(filters).on('click', function() {
+            clearPreviousLayers();
+            loadKmlLayer($(this).data('layerUrl'), map);
+        });
+    }
+
+    function clearPreviousLayers() {
+        $.each( kmlLayers, function( key, value ) {
+            value.layerInstance.setMap(null);
+        });
     }
 
     /**
@@ -41,6 +39,11 @@ var gMap = (function() {
             preserveViewport: true,
             map: map
         });
+
+        kmlLayers.push({
+            layerInstance: kmlLayer,
+            src: src
+        });
 //        google.maps.event.addListener(kmlLayer, 'click', function(event) {
 //            var content = event.featureData.infoWindowHtml;
 //            var testimonial = document.getElementById('capture');
@@ -48,7 +51,14 @@ var gMap = (function() {
 //        });
     }
 
-    return {
-        init: initialize
+
+    var constructor = function Podcast(data) {
+        map = data.map;
+        filters = data.filters;
+        setEvents();
     };
+
+    constructor.prototype.loadAll = loadAll;
+
+    return constructor;
 })();
