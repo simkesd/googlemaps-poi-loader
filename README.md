@@ -7,7 +7,7 @@ You must load jquery, in my example I am using version 2.1.3.
 
 HTML structure
 
-```
+``` HTML
 <ul class="filters">
     <li data-layer-url="http://happyfist.co/pois/pois/POI/gyms.kml"><a>Gyms</a></li>
     <li data-layer-url="http://happyfist.co/pois/pois/POI/hotels.kml"><a>Hotels</a></li>
@@ -17,7 +17,7 @@ Javascript
 
 You must initialize map by yourself, and pass reference to the map to constructor of library
 
-```
+``` javascript
 var map;
         function initialize() {
             map = new google.maps.Map(document.getElementById('map-canvas'), {
