@@ -1,0 +1,23 @@
+{
+  "name": "googlemaps-poi-loader",
+  "version": "0.0.0",
+  "homepage": "https://simkesd.github.io/googlemaps-poi-loader/",
+  "authors": [
+    "Milos Simic <simkesd@gmail.com>"
+  ],
+  "description": "Small and simple Library that helps you load your Points Of Interests in kml format on your google map.",
+  "main": "dist/googlemaps-poi-loader.js",
+  "keywords": [
+    "google",
+    "map",
+    "poi"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
