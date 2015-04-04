@@ -9,9 +9,9 @@ var gMap = (function() {
     /**
      * Initializes the map and calls the function that creates poly lines.
      */
-    function loadAll() {
+    function loadAll(customOptions) {
         $.each( filters, function( key, value ) {
-            addKmlLayer($(value).data('layerUrl'));
+            addKmlLayer($(value).data('layerUrl'), customOptions);
         });
     }
 
@@ -39,8 +39,8 @@ var gMap = (function() {
      * results in the balloon content being loaded into the right-hand div.
      * @param {string} src A URL for a KML file.
      */
-    function addKmlLayer(src) {
-        var kmlLayer = loadLayerOnMap(src);
+    function addKmlLayer(src, customOptions) {
+        var kmlLayer = loadLayerOnMap(src, customOptions);
 
 //        google.maps.event.addListener(kmlLayer, 'click', function(event) {
 //            var content = event.featureData.infoWindowHtml;
@@ -74,9 +74,9 @@ var gMap = (function() {
         return kmlLayers;
     }
 
-    function loadSingleLayer(src) {
+    function loadSingleLayer(src, customOptions) {
         clearPreviousLayers();
-        loadLayerOnMap(src);
+        loadLayerOnMap(src, customOptions);
     }
 
     var constructor = function Constructor(data) {
