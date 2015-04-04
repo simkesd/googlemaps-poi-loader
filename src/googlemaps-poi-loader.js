@@ -7,11 +7,11 @@ var gMap = (function() {
     var filterClickCallback;
 
     /**
-     * Initializes the map and calls the function that creates polylines.
+     * Initializes the map and calls the function that creates poly lines.
      */
     function loadAll() {
         $.each( filters, function( key, value ) {
-            loadKmlLayer($(value).data('layerUrl'), map);
+            addKmlLayer($(value).data('layerUrl'));
         });
     }
 
@@ -20,7 +20,7 @@ var gMap = (function() {
             if(!onLayerChangeKeepState) {
                 clearPreviousLayers();
             }
-            loadKmlLayer($(this).data('layerUrl'), map);
+            addKmlLayer($(this).data('layerUrl'), map);
             if(filterClickCallback !== undefined) {
                 filterClickCallback();
             }
@@ -31,6 +31,7 @@ var gMap = (function() {
         $.each(kmlLayers, function(key, value) {
             value.layerInstance.setMap(null);
         });
+        kmlLayers = [];
     }
 
     /**
@@ -38,17 +39,9 @@ var gMap = (function() {
      * results in the balloon content being loaded into the right-hand div.
      * @param {string} src A URL for a KML file.
      */
-    function loadKmlLayer(src, map) {
-        var kmlLayer = new google.maps.KmlLayer(src, {
-//            suppressInfoWindows: true,
-            preserveViewport: true,
-            map: map
-        });
+    function addKmlLayer(src) {
+        var kmlLayer = loadLayerOnMap(src);
 
-        kmlLayers.push({
-            layerInstance: kmlLayer,
-            src: src
-        });
 //        google.maps.event.addListener(kmlLayer, 'click', function(event) {
 //            var content = event.featureData.infoWindowHtml;
 //            var testimonial = document.getElementById('capture');
@@ -56,8 +49,37 @@ var gMap = (function() {
 //        });
     }
 
+    function loadLayerOnMap(src, customOptions) {
 
-    var constructor = function Podcast(data) {
+        var defaultOptions = {
+//            suppressInfoWindows: true,
+            preserveViewport: true,
+            map: map
+        };
+
+        var finalOptions = {};
+        $.extend(true, finalOptions, defaultOptions, customOptions);
+
+        var kmlLayer = new google.maps.KmlLayer(src, finalOptions);
+
+        kmlLayers.push({
+            layerInstance: kmlLayer,
+            src: src
+        });
+
+        return kmlLayer;
+    }
+
+    function getLayers() {
+        return kmlLayers;
+    }
+
+    function loadSingleLayer(src) {
+        clearPreviousLayers();
+        loadLayerOnMap(src);
+    }
+
+    var constructor = function Constructor(data) {
         if(data.map === undefined) {
             throw new Error('Google map object must be passed as property of data parameter.')
         }
@@ -72,6 +94,9 @@ var gMap = (function() {
     };
 
     constructor.prototype.loadAll = loadAll;
+    constructor.prototype.addLayer = addKmlLayer;
+    constructor.prototype.getLayers = getLayers;
+    constructor.prototype.loadSingleLayer = loadSingleLayer;
 
     return constructor;
 })();
