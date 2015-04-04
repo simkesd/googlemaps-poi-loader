@@ -3,6 +3,8 @@ Small and simple Library that helps you load your Points Of Interests in kml for
 I decided to test my knowledge of javascript and I've tried to make a library with some basic options.
 Google maps poi loader may be of use for you if you have a list of POIs you want to load to your map, 
 and add some functionalities to that list such as loading only POIs of clicked element.
+
+For the demo you can visit [Demo Page](http://simkesd.github.io/googlemaps-poi-loader/demo.html).
 ### Usage
 
 You must load jquery, in my example I am using version 2.1.3.
