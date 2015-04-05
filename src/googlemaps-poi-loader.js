@@ -8,6 +8,15 @@ var gMap = (function() {
     var onLayerChangeKeepState;
 
     /**
+     * Returns all currently loaded layers.
+     *
+     * @returns {Array}
+     */
+    function getLayers() {
+        return kmlLayers;
+    }
+
+    /**
      * Uses DOM data passed to constructor to load all POIs to the map
      */
     function loadAll(customOptions) {
@@ -81,15 +90,6 @@ var gMap = (function() {
         });
 
         return kmlLayer;
-    }
-
-    /**
-     * Returns all currently loaded layers.
-     *
-     * @returns {Array}
-     */
-    function getLayers() {
-        return kmlLayers;
     }
 
     /**
