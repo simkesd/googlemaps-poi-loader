@@ -89,7 +89,6 @@ var gMap = (function() {
             url: src,
             preserveViewport: true,
             map: map
-            //suppressInfoWindows: true
         };
 
         var finalOptions = {};
@@ -117,6 +116,16 @@ var gMap = (function() {
     }
 
     var constructor = function Constructor(data) {
+        var exampleOptions = {
+            map: 'mapa',
+            filters: '$(ul#filteri li)',
+            filterClickCallback: 'funkcija',
+            onLayerChangeKeepState: 'brisi il ne brisi',
+            showOnLoad: 'na ucit prikazi ili ne',
+            classForActiveFilters: 'klasa',
+            setEvents: true
+        };
+
         if(data.map === undefined) {
             throw new Error('Google map object must be passed as property of data parameter.')
         }
@@ -128,16 +137,6 @@ var gMap = (function() {
         filters = data.filters;
         filterClickCallback = data.filterClickCallback;
         onLayerChangeKeepState = data.onLayerChangeKeepState || false;
-
-        var exampleOptions = {
-            map: 'mapa',
-            filters: '$(ul#filteri li)',
-            filterClickCallback: 'funkcija',
-            onLayerChangeKeepState: 'brisi il ne brisi',
-            showOnLoad: 'na ucit prikazi ili ne',
-            classForActiveFilters: 'klasa',
-            setEvents: true
-        };
 
         if(data.setEvents === true || data.setEvents === undefined) {
             setEvents();
