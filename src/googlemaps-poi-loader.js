@@ -110,13 +110,35 @@ var gMap = (function() {
         if(data.filters === undefined) {
             throw new Error('Array of DOM elements containing data-layer-url attribute must be passed as property of data parameter.')
         }
+
         map = data.map;
         filters = data.filters;
-        filterClickCallback = data.filterClickCallback
+        filterClickCallback = data.filterClickCallback;
         onLayerChangeKeepState = data.onLayerChangeKeepState || false;
+
+        var exampleOptions = {
+            map: 'mapa',
+            filters: '$(ul#filteri li)',
+            filterClickCallback: 'funkcija',
+            onLayerChangeKeepState: 'brisi il ne brisi',
+            showOnLoad: 'na ucit prikazi ili ne',
+            classForActiveFilters: 'klasa',
+            setEvents: true
+        };
+
+        if(data.setEvents === true || data.setEvents === undefined) {
+            setEvents();
+        }
+
+        if(data.showOnLoad) {
+            loadAll();
+        }
+
+        console.log(data);
     };
 
     constructor.prototype.loadAll = loadAll;
+
     constructor.prototype.addLayer = addKmlLayer;
     constructor.prototype.getLayers = getLayers;
     constructor.prototype.loadSingleLayer = loadSingleLayer;

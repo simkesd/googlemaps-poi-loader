@@ -26,11 +26,10 @@
                 filters: $('ul.filters li'),
                 filterClickCallback: function() {
                     console.log('filterClickCallback');
-                }
+                },
+//                showOnLoad: false,
+//                onLayerChangeKeepState: true
             });
-
-            gm.loadAll();
-            gm.setEvents();
         }
 
         google.maps.event.addDomListener(window, 'load', initialize);
