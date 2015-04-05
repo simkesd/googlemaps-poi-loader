@@ -114,13 +114,13 @@ var gMap = (function() {
         filters = data.filters;
         filterClickCallback = data.filterClickCallback
         onLayerChangeKeepState = data.onLayerChangeKeepState || false;
-        setEvents();
     };
 
     constructor.prototype.loadAll = loadAll;
     constructor.prototype.addLayer = addKmlLayer;
     constructor.prototype.getLayers = getLayers;
     constructor.prototype.loadSingleLayer = loadSingleLayer;
+    constructor.prototype.setEvents = setEvents;
     constructor.prototype.clearPreviousLayers = clearPreviousLayers;
 
     return constructor;
