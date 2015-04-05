@@ -29,15 +29,28 @@ var gMap = (function() {
         $(filters).on('click', function() {
             if(!onLayerChangeKeepState) {
                 clearPreviousLayers();
+            }else {
+                for(var i = 0; i < kmlLayers.length; i++) {
+                    var layerLoaded = false;
+                    if(kmlLayers[i].src === $(this).data('layerUrl')) {
+                        layerLoaded = true;
+                        removeLayer(i);
+                    }
+                }
             }
             if(filterClickCallback !== undefined) {
                 filterClickCallback();
             }
-            addKmlLayer($(this).data('layerUrl'));
-
+            if(!layerLoaded) {
+                addKmlLayer($(this).data('layerUrl'));
+            }
         });
     }
 
+    function removeLayer(index) {
+        kmlLayers[index].layerInstance.setMap(null);
+        kmlLayers.splice(index, 1);
+    }
     /**
      * Removes all previous layers from map and clears all layers from kmlLayer array
      */
