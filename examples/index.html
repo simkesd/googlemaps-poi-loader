@@ -30,14 +30,6 @@
             });
 
             gm.loadAll();
-            gm.addLayer('http://happyfist.co/pois/pois/POI/hotels.kml');
-            gm.addLayer('http://happyfist.co/pois/pois/POI/gyms.kml');
-
-            console.log(gm.getLayers());
-
-            gm.loadSingleLayer('http://happyfist.co/pois/pois/POI/hotels.kml');
-
-            console.log(gm.getLayers());
         }
 
         google.maps.event.addDomListener(window, 'load', initialize);

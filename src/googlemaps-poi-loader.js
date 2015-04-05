@@ -5,6 +5,7 @@ var gMap = (function() {
     };
     var kmlLayers = [];
     var filterClickCallback;
+    var onLayerChangeKeepState;
 
     /**
      * Uses DOM data passed to constructor to load all POIs to the map
@@ -20,10 +21,11 @@ var gMap = (function() {
             if(!onLayerChangeKeepState) {
                 clearPreviousLayers();
             }
-            addKmlLayer($(this).data('layerUrl'), map);
             if(filterClickCallback !== undefined) {
                 filterClickCallback();
             }
+            addKmlLayer($(this).data('layerUrl'));
+
         });
     }
 
@@ -62,15 +64,16 @@ var gMap = (function() {
     function loadLayerOnMap(src, customOptions) {
 
         var defaultOptions = {
-//            suppressInfoWindows: true,
+            url: src,
             preserveViewport: true,
             map: map
+            //suppressInfoWindows: true
         };
 
         var finalOptions = {};
         $.extend(true, finalOptions, defaultOptions, customOptions);
 
-        var kmlLayer = new google.maps.KmlLayer(src, finalOptions);
+        var kmlLayer = new google.maps.KmlLayer(finalOptions);
 
         kmlLayers.push({
             layerInstance: kmlLayer,
