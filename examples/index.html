@@ -29,12 +29,13 @@
                 map: map,
                 filters: $('ul.filters li'),
                 filterClickCallback: function() {
-                    console.log('filterClickCallback');
+                    console.info('filterClickCallback called!');
                 },
+                setEvents: true,
                 showOnLoad: true,
                 onLayerChangeKeepState: true
             });
-            console.log(kl);
+            console.log(kl.callbackReturnValue);
         }
 
 

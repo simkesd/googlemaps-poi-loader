@@ -1,20 +1,11 @@
-var kmlLoader = (function(options) {
+var kmlLoader = (function() {
     var map,
-        filters = {
-        },
+        filters = {},
         kmlLayers = [],
         filterClickCallback,
         onLayerChangeKeepState = false,
         showOnLoad = false,
-        exampleOptions = {
-            map: 'mapa',
-            filters: '$(ul#filteri li)',
-            filterClickCallback: 'funkcija',
-            onLayerChangeKeepState: 'brisi il ne brisi',
-            showOnLoad: 'na ucit prikazi ili ne',
-            classForActiveFilters: 'klasa',
-            setEvents: true
-        };
+        callbackReturnValue = null;
 
     /**
      * Returns all currently loaded KML layers.
@@ -41,6 +32,7 @@ var kmlLoader = (function(options) {
      * If you passed filterClickCallback as param, it will execute before the function exits.
      */
     function setEvents() {
+        console.log(2);
         $(filters).on('click', function() {
             if(!onLayerChangeKeepState) {
                 clearPreviousLayers();
@@ -57,7 +49,9 @@ var kmlLoader = (function(options) {
                 addKmlLayer($(this).data('layerUrl'));
             }
             if(filterClickCallback !== undefined) {
-                filterClickCallback();
+                console.log(3);
+                constructor.prototype.callbackReturnValue = filterClickCallback();
+                console.log(4);
             }
         });
     }
@@ -77,7 +71,7 @@ var kmlLoader = (function(options) {
         $.each(kmlLayers, function(key, value) {
             value.layerInstance.setMap(null);
         });
-        kmlLayers = [];
+        constructor.prototype.kmlLayers = [];
     }
 
     /**
@@ -87,7 +81,6 @@ var kmlLoader = (function(options) {
      */
     function addKmlLayer(src, customOptions) {
         var kmlLayer = loadLayerOnMap(src, customOptions);
-
 //        google.maps.event.addListener(kmlLayer, 'click', function(event) {
 //            var content = event.featureData.infoWindowHtml;
 //            var testimonial = document.getElementById('capture');
@@ -138,6 +131,7 @@ var kmlLoader = (function(options) {
         if(data == undefined) {
             throw new Error('You must pass parameters to kmlLoader object.');
         }
+
         if(data.map === undefined) {
             throw new Error('Google map object must be passed as property of data parameter.')
         }
@@ -151,13 +145,20 @@ var kmlLoader = (function(options) {
         onLayerChangeKeepState = data.onLayerChangeKeepState || onLayerChangeKeepState;
         showOnLoad = data.showOnLoad;
 
-        if(data.setEvents === true || data.setEvents === undefined) {
+        if(data.setEvents === true) {
+            console.log(1);
             setEvents();
         }
 
         if(showOnLoad) {
             loadAll();
         }
+        //removeIf(onlyForTesting)
+        constructor.prototype.map = map;
+        constructor.prototype.filters = filters;
+        constructor.prototype.callbackReturnValue = callbackReturnValue;
+        constructor.prototype.kmlLayers = kmlLayers;
+        //endRemoveIf(onlyForTesting)
     };
 
     constructor.prototype.loadAll = loadAll;
