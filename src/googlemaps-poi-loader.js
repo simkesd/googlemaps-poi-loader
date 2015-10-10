@@ -1,14 +1,23 @@
-var gMap = (function() {
-    var map;
-    var filters = {
-
-    };
-    var kmlLayers = [];
-    var filterClickCallback;
-    var onLayerChangeKeepState;
+var kmlLoader = (function(options) {
+    var map,
+        filters = {
+        },
+        kmlLayers = [],
+        filterClickCallback,
+        onLayerChangeKeepState = false,
+        showOnLoad = false,
+        exampleOptions = {
+            map: 'mapa',
+            filters: '$(ul#filteri li)',
+            filterClickCallback: 'funkcija',
+            onLayerChangeKeepState: 'brisi il ne brisi',
+            showOnLoad: 'na ucit prikazi ili ne',
+            classForActiveFilters: 'klasa',
+            setEvents: true
+        };
 
     /**
-     * Returns all currently loaded layers.
+     * Returns all currently loaded KML layers.
      *
      * @returns {Array}
      */
@@ -17,40 +26,50 @@ var gMap = (function() {
     }
 
     /**
-     * Uses DOM data passed to constructor to load all POIs to the map
+     * Uses DOM data passed to constructor to load all KMLs to the map
      */
     function loadAll(customOptions) {
-        $.each( filters, function( key, value ) {
+        $.each(filters, function(key, value) {
             addKmlLayer($(value).data('layerUrl'), customOptions);
         });
     }
 
+    /**
+     * Sets events for clicking on kml layer element. If onLayerChangeKeepState is true, then
+     * all layers will be cleared on kml layer element click. The function also check if kml
+     * layer is already loaded. If it is, then it will remove it, if it's not, it will load it.
+     * If you passed filterClickCallback as param, it will execute before the function exits.
+     */
     function setEvents() {
         $(filters).on('click', function() {
             if(!onLayerChangeKeepState) {
                 clearPreviousLayers();
             }else {
+                var layerLoaded = false;
                 for(var i = 0; i < kmlLayers.length; i++) {
-                    var layerLoaded = false;
                     if(kmlLayers[i].src === $(this).data('layerUrl')) {
                         layerLoaded = true;
                         removeLayer(i);
                     }
                 }
             }
-            if(filterClickCallback !== undefined) {
-                filterClickCallback();
-            }
             if(!layerLoaded) {
                 addKmlLayer($(this).data('layerUrl'));
+            }
+            if(filterClickCallback !== undefined) {
+                filterClickCallback();
             }
         });
     }
 
+    /**
+     * Removes single layer from map and removes it from kmlLayers array
+     */
     function removeLayer(index) {
         kmlLayers[index].layerInstance.setMap(null);
         kmlLayers.splice(index, 1);
     }
+
     /**
      * Removes all previous layers from map and clears all layers from kmlLayer array
      */
@@ -115,17 +134,10 @@ var gMap = (function() {
         loadLayerOnMap(src, customOptions);
     }
 
-    var constructor = function Constructor(data) {
-        var exampleOptions = {
-            map: 'mapa',
-            filters: '$(ul#filteri li)',
-            filterClickCallback: 'funkcija',
-            onLayerChangeKeepState: 'brisi il ne brisi',
-            showOnLoad: 'na ucit prikazi ili ne',
-            classForActiveFilters: 'klasa',
-            setEvents: true
-        };
-
+    var constructor = function PoiLoader(data) {
+        if(data == undefined) {
+            throw new Error('You must pass parameters to kmlLoader object.');
+        }
         if(data.map === undefined) {
             throw new Error('Google map object must be passed as property of data parameter.')
         }
@@ -136,21 +148,19 @@ var gMap = (function() {
         map = data.map;
         filters = data.filters;
         filterClickCallback = data.filterClickCallback;
-        onLayerChangeKeepState = data.onLayerChangeKeepState || false;
+        onLayerChangeKeepState = data.onLayerChangeKeepState || onLayerChangeKeepState;
+        showOnLoad = data.showOnLoad;
 
         if(data.setEvents === true || data.setEvents === undefined) {
             setEvents();
         }
 
-        if(data.showOnLoad) {
+        if(showOnLoad) {
             loadAll();
         }
-
-        console.log(data);
     };
 
     constructor.prototype.loadAll = loadAll;
-
     constructor.prototype.addLayer = addKmlLayer;
     constructor.prototype.getLayers = getLayers;
     constructor.prototype.loadSingleLayer = loadSingleLayer;
