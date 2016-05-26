@@ -27,7 +27,7 @@
 
             kl = new kmlLoader({
                 map: map,
-                filters: $('ul.filters li'),
+                filters: document.querySelectorAll('ul.filters li'),
                 filterClickCallback: function() {
                     console.info('filterClickCallback called!');
                 },

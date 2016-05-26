@@ -20,9 +20,9 @@ var kmlLoader = (function() {
      * Uses DOM data passed to constructor to load all KMLs to the map
      */
     function loadAll(customOptions) {
-        $.each(filters, function(key, value) {
-            addKmlLayer($(value).data('layerUrl'), customOptions);
-        });
+      for(var i = 0; i < filters.length; i++) {
+        addKmlLayer(filters[i].dataset.layerUrl, customOptions);
+      }
     }
 
     /**
@@ -32,7 +32,6 @@ var kmlLoader = (function() {
      * If you passed filterClickCallback as param, it will execute before the function exits.
      */
     function setEvents() {
-        console.log(2);
         $(filters).on('click', function() {
             if(!onLayerChangeKeepState) {
                 clearPreviousLayers();
@@ -68,9 +67,9 @@ var kmlLoader = (function() {
      * Removes all previous layers from map and clears all layers from kmlLayer array
      */
     function clearPreviousLayers() {
-        $.each(kmlLayers, function(key, value) {
-            value.layerInstance.setMap(null);
-        });
+      for(var i = 0; i < kmlLayers.length; i++) {
+          kmlLayers[i].layerInstance.setMap(null);
+      }
         constructor.prototype.kmlLayers = [];
     }
 
@@ -146,7 +145,6 @@ var kmlLoader = (function() {
         showOnLoad = data.showOnLoad;
 
         if(data.setEvents === true) {
-            console.log(1);
             setEvents();
         }
 
