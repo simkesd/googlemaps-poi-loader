@@ -1,7 +1,9 @@
+# outdated - i will test in multiple browsers after removing jquery and update instructions by the end of the week
+
 # googlemaps-poi-loader
 Small and simple Library that helps you load your Points Of Interests in kml format on your google map.
 I decided to test my knowledge of javascript and I've tried to make a library with some basic options.
-Google maps poi loader may be of use for you if you have a list of POIs you want to load to your map, 
+Google maps poi loader may be of use for you if you have a list of POIs you want to load to your map,
 and add some functionalities to that list such as loading only POIs of clicked element.
 
 For the demo you can visit [Demo Page](http://simkesd.github.io/googlemaps-poi-loader/demo.html).
@@ -55,7 +57,7 @@ var map;
 ```
 
 This portion of code will create initialize a google map for you (and set some options also, so you can actually see POIs)
-Part of this code that we are particularly interested is next one: 
+Part of this code that we are particularly interested is next one:
 
 ``` javascript
 var gm = new gMap({
@@ -72,7 +74,7 @@ gm.loadAll();
 This code is initializing our library by sending required parameters to constructor. So, required parameters are
     * Instance of google map object and
     * Array of DOM elements containing data-layer-url attribute. Its content should be exact location of your KML file.
-    
+
 ### Additional info
 
 ##### gMaps()
