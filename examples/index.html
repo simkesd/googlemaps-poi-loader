@@ -25,9 +25,7 @@
                 mapTypeId: google.maps.MapTypeId.TERRAIN
             });
 
-            kl = new kmlLoader({
-                map: map,
-                filters: document.querySelectorAll('ul.filters li'),
+            kl = new kmlLoader(map, document.querySelectorAll('ul.filters li'), {
                 filterClickCallback: function() {
                     console.info('filterClickCallback called!');
                 },
@@ -35,7 +33,6 @@
                 showOnLoad: true,
                 onLayerChangeKeepState: true
             });
-            console.log(kl.callbackReturnValue);
         }
 
 

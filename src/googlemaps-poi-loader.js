@@ -1,11 +1,12 @@
 var kmlLoader = (function() {
-    var map,
-        filters = {},
-        kmlLayers = [],
-        filterClickCallback,
-        onLayerChangeKeepState = false,
-        showOnLoad = false,
-        callbackReturnValue = null;
+    var self = { map: null,
+        filters : {},
+        kmlLayers : [],
+        filterClickCallback: null,
+        onLayerChangeKeepState: false,
+        showOnLoad: false,
+        callbackReturnValue: null
+      };
 
     /**
      * Returns all currently loaded KML layers.
@@ -13,15 +14,15 @@ var kmlLoader = (function() {
      * @returns {Array}
      */
     function getLayers() {
-        return kmlLayers;
+        return self.kmlLayers;
     }
 
     /**
      * Uses DOM data passed to constructor to load all KMLs to the map
      */
     function loadAll(customOptions) {
-      for(var i = 0; i < filters.length; i++) {
-        addKmlLayer(filters[i].dataset.layerUrl, customOptions);
+      for(var i = 0; i < self.filters.length; i++) {
+        addKmlLayer(self.filters[i].dataset.layerUrl, customOptions);
       }
     }
 
@@ -32,42 +33,43 @@ var kmlLoader = (function() {
      * If you passed filterClickCallback as param, it will execute before the function exits.
      */
     function setEvents() {
-        $(filters).on('click', function() {
-            if(!onLayerChangeKeepState) {
-                clearPreviousLayers();
-            }else {
-                var layerLoaded = false;
-                for(var i = 0; i < kmlLayers.length; i++) {
-                    if(kmlLayers[i].src === $(this).data('layerUrl')) {
-                        layerLoaded = true;
-                        removeLayer(i);
-                    }
-                }
-            }
-            if(!layerLoaded) {
-                addKmlLayer($(this).data('layerUrl'));
-            }
-            if(filterClickCallback !== undefined) {
-                console.log(3);
-                constructor.prototype.callbackReturnValue = filterClickCallback();
-                console.log(4);
-            }
-        });
+      for(var i = 0; i < self.filters.length; i++) {
+        self.filters[i].onclick = function(e) {
+          var layerLoaded = false;
+          var layerUrl = this.dataset.layerUrl;
+          if(!self.onLayerChangeKeepState) {
+              clearPreviousLayers();
+          }else {
+              for(var i = 0; i < self.kmlLayers.length; i++) {
+                  if(self.kmlLayers[i].src === layerUrl) {
+                      layerLoaded = true;
+                      removeLayer(i);
+                  }
+              }
+          }
+          if(!layerLoaded) {
+              addKmlLayer(layerUrl);
+          }
+          if(self.filterClickCallback !== undefined) {
+              constructor.prototype.callbackReturnValue = self.filterClickCallback();
+          }
+        }
+      }
     }
 
     /**
      * Removes single layer from map and removes it from kmlLayers array
      */
     function removeLayer(index) {
-        kmlLayers[index].layerInstance.setMap(null);
-        kmlLayers.splice(index, 1);
+        self.kmlLayers[index].layerInstance.setMap(null);
+        self.kmlLayers.splice(index, 1);
     }
 
     /**
      * Removes all previous layers from map and clears all layers from kmlLayer array
      */
     function clearPreviousLayers() {
-      for(var i = 0; i < kmlLayers.length; i++) {
+      for(var i = 0; i < self.kmlLayers.length; i++) {
           kmlLayers[i].layerInstance.setMap(null);
       }
         constructor.prototype.kmlLayers = [];
@@ -103,11 +105,15 @@ var kmlLoader = (function() {
         };
 
         var finalOptions = {};
-        $.extend(true, finalOptions, defaultOptions, customOptions);
+        for(var key in customOptions) {
+          if (customOptions.hasOwnProperty(key)) {
+              defaultOptions[key] = customOptions[key];
+          };
+        }
 
-        var kmlLayer = new google.maps.KmlLayer(finalOptions);
+        var kmlLayer = new google.maps.KmlLayer(defaultOptions);
 
-        kmlLayers.push({
+        self.kmlLayers.push({
             layerInstance: kmlLayer,
             src: src
         });
@@ -126,37 +132,27 @@ var kmlLoader = (function() {
         loadLayerOnMap(src, customOptions);
     }
 
-    var constructor = function PoiLoader(data) {
-        if(data == undefined) {
-            throw new Error('You must pass parameters to kmlLoader object.');
+    var constructor = function PoiLoader(map, filters, options) {
+        if(map === undefined) {
+            throw new Error('Google map object must be passed as first parameter.')
+        }
+        if(filters === undefined) {
+            throw new Error('Array of DOM elements containing data-layer-url attribute must be passed as second parameter.')
         }
 
-        if(data.map === undefined) {
-            throw new Error('Google map object must be passed as property of data parameter.')
-        }
-        if(data.filters === undefined) {
-            throw new Error('Array of DOM elements containing data-layer-url attribute must be passed as property of data parameter.')
-        }
+        self.map = map;
+        self.filters = filters;
+        self.filterClickCallback = options.filterClickCallback;
+        self.onLayerChangeKeepState = options.onLayerChangeKeepState || onLayerChangeKeepState;
+        self.showOnLoad = options.showOnLoad || showOnLoad;
 
-        map = data.map;
-        filters = data.filters;
-        filterClickCallback = data.filterClickCallback;
-        onLayerChangeKeepState = data.onLayerChangeKeepState || onLayerChangeKeepState;
-        showOnLoad = data.showOnLoad;
-
-        if(data.setEvents === true) {
+        if(options.setEvents === true) {
             setEvents();
         }
 
-        if(showOnLoad) {
+        if(self.showOnLoad) {
             loadAll();
         }
-        //removeIf(onlyForTesting)
-        constructor.prototype.map = map;
-        constructor.prototype.filters = filters;
-        constructor.prototype.callbackReturnValue = callbackReturnValue;
-        constructor.prototype.kmlLayers = kmlLayers;
-        //endRemoveIf(onlyForTesting)
     };
 
     constructor.prototype.loadAll = loadAll;
