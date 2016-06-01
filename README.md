@@ -1,14 +1,24 @@
 # KML loader
-Library that helps you load your Points Of Interests in kml format on your google map.
+Library that helps you load locations from KML files on your google map.
 
 For the demo you can visit [Demo Page](http://simkesd.github.io/kml-loader/demo.html).
+
 ### Usage
 
+I will explain how this works, but using it is pretty straight forward. Just check out the source code for [example](https://github.com/simkesd/kml-loader/blob/master/examples/index.html).
 The important file here is `dist/kml-loader.js`. After you include it you can then create an instance of `kmlLoader` object. `kmlLoader` has 3 parameters.
 
 1. google map object (instance of `google.maps.Map(elem)`);
-2. array of elements containing `data-layer-url` attribute based on which `kmlLoader` will generate pins on google map.
+2. array of elements containing `data-layer-url` attribute based on which `kmlLoader` will generate pins on google map. (`document.querySelectorAll('ul.filters li')`)
 3. object containing additional, non-required options
+```
+{
+        filterClickCallback: function(){}, // fired after one of DOM elements passed as second param is clicked
+        setEvents: true, // if true sets events which control what happens on filter click
+        showOnLoad: true, // load all KMLs on page load
+        onLayerChangeKeepState: true // if true - keeps state, if false - only one layer at a time can be showed
+}
+```
 
 ##### HTML structure
 
@@ -82,15 +92,20 @@ provided DOM elements and to load only clicked kml layer to your map.
 
 ##### loadAll(customOptions)
 Loads all kml layers from DOM elements you passed through data-layer-url to constructor,
+`param {object} object with layer options` [details](https://developers.google.com/maps/documentation/javascript/examples/layer-kml)
 
 ##### getLayers()
 Returns all kml layers currently loaded to map
 
 ##### addLayer(src, customOptions)
-Loads single layer to google map while keeping previously set layers.
+Adds a KMLLayer based on the URL and options passed
+`param {string} src A URL for a KML file.`
+`param {object} object with layer options` [details](https://developers.google.com/maps/documentation/javascript/examples/layer-kml)
 
 ##### loadSingleLayer(src, customOptions)
 Loads single layer to google map, and deletes all previously set layers.
+`param {string} src A URL for a KML file.`
+`param {object} object with layer options` [details](https://developers.google.com/maps/documentation/javascript/examples/layer-kml)
 
 ##### clearPreviousLayers()
 Clears your google map from previously set layers.

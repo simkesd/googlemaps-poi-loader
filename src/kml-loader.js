@@ -82,11 +82,11 @@ var kmlLoader = (function() {
      */
     function addLayer(src, customOptions) {
         var kmlLayer = loadLayerOnMap(src, customOptions);
-       google.maps.event.addListener(kmlLayer, 'click', function(event) {
-           var content = event.featureData.infoWindowHtml;
-           var testimonial = document.getElementById('capture');
-           testimonial.innerHTML = content;
-       });
+       // google.maps.event.addListener(kmlLayer, 'click', function(event) {
+       //     var content = event.featureData.infoWindowHtml;
+       //     var testimonial = document.getElementById('capture');
+       //     testimonial.innerHTML = content;
+       // });
     }
 
     /**
