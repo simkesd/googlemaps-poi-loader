@@ -1,107 +1,46 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Googlemaps-poi-loader by simkesd</title>
+    <title>Examples</title>
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!-- Google maps -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
 
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnE-1nPwT6BAloOYpBWtpauRvucL0erPA"></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-    <script type="text/javascript" src="../src/googlemaps-poi-loader.js"></script>
+    <!-- Custom -->
+    <script type="text/javascript" src="../src/kml-loader.js"></script>
+    <link href="styles/app.css" rel="stylesheet" type="text/css" />
 
     <script>
         var map;
+        var kl;
         function initialize() {
             map = new google.maps.Map(document.getElementById('map-canvas'), {
                 center: new google.maps.LatLng(40.751077, -73.945135),
                 zoom: 13,
                 mapTypeId: google.maps.MapTypeId.TERRAIN
             });
-
-            var gm = new gMap({
-                map: map,
-                filters: $('ul.filters li'),
+            kl = new kmlLoader(map, document.querySelectorAll('ul.filters li'), {
                 filterClickCallback: function() {
-                    console.log('filterClickCallback');
-                }
+                    console.info('filterClickCallback called!');
+                },
+                setEvents: true,
+                showOnLoad: true,
+                onLayerChangeKeepState: true
             });
-
-            gm.loadAll();
-            gm.addLayer('http://happyfist.co/pois/pois/POI/hotels.kml');
-            gm.addLayer('http://happyfist.co/pois/pois/POI/gyms.kml');
-
-            console.log(gm.getLayers());
-
-            gm.loadSingleLayer('http://happyfist.co/pois/pois/POI/hotels.kml');
-
-            console.log(gm.getLayers());
         }
-
         google.maps.event.addDomListener(window, 'load', initialize);
-
     </script>
 
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
 </head>
 <body>
-<div class="wrapper">
-    <header>
-        <h1>Googlemaps-poi-loader</h1>
 
-        <p>Library that helps you load your Points Of Interests on google map.</p>
+<ul class="filters">
+    <li data-layer-url="https://raw.githubusercontent.com/simkesd/kml-loader/master/examples/kmls/gyms.kml"><a>Gyms</a></li>
+    <li data-layer-url="https://raw.githubusercontent.com/simkesd/kml-loader/master/examples/kmls/hotels.kml"><a>Hotels</a></li>
+</ul>
 
-        <p class="view"><a href="https://github.com/simkesd/googlemaps-poi-loader">View the Project on GitHub
-            <small>simkesd/googlemaps-poi-loader</small>
-        </a></p>
-
-
-        <ul>
-            <li><a href="https://github.com/simkesd/googlemaps-poi-loader/zipball/master">Download <strong>ZIP
-                File</strong></a></li>
-            <li><a href="https://github.com/simkesd/googlemaps-poi-loader/tarball/master">Download <strong>TAR
-                Ball</strong></a></li>
-            <li><a href="https://github.com/simkesd/googlemaps-poi-loader">View On <strong>GitHub</strong></a></li>
-        </ul>
-    </header>
-    <section>
-
-        <ul class="filters">
-            <li data-layer-url="http://happyfist.co/pois/pois/POI/gyms.kml"><a>Gyms</a></li>
-            <li data-layer-url="http://happyfist.co/pois/pois/POI/hotels.kml"><a>Hotels</a></li>
-        </ul>
-
-        <div id="map-canvas"></div>
-    </section>
-    <footer>
-        <p>This project is maintained by <a href="https://github.com/simkesd">simkesd</a></p>
-
-        <p>
-            <small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a>
-            </small>
-        </p>
-    </footer>
-</div>
-<script src="javascripts/scale.fix.js"></script>
-<script type="text/javascript">
-    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-47470142-5', 'auto');
-    ga('send', 'pageview');
-
-</script>
+<div id="map-canvas"></div>
 
 </body>
 </html>
