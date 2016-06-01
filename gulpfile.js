@@ -9,7 +9,7 @@ gulp.task('build', function() {
      * Compress and minify src file.
      */
 
-    gulp.src('./src/*.js')
+    gulp.src('./src/kml-loader.js')
         .pipe(uglify())
         .pipe(gulp.dest('./dist/'));
 });

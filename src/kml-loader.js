@@ -22,7 +22,7 @@ var kmlLoader = (function() {
      */
     function loadAll(customOptions) {
       for(var i = 0; i < self.filters.length; i++) {
-        addKmlLayer(self.filters[i].dataset.layerUrl, customOptions);
+        addLayer(self.filters[i].dataset.layerUrl, customOptions);
       }
     }
 
@@ -48,7 +48,7 @@ var kmlLoader = (function() {
               }
           }
           if(!layerLoaded) {
-              addKmlLayer(layerUrl);
+              addLayer(layerUrl);
           }
           if(self.filterClickCallback !== undefined) {
               constructor.prototype.callbackReturnValue = self.filterClickCallback();
@@ -80,13 +80,13 @@ var kmlLoader = (function() {
      * @param {string} src A URL for a KML file.
      * @param {object} object with layer options (further reading https://developers.google.com/maps/documentation/javascript/examples/layer-kml)
      */
-    function addKmlLayer(src, customOptions) {
+    function addLayer(src, customOptions) {
         var kmlLayer = loadLayerOnMap(src, customOptions);
-//        google.maps.event.addListener(kmlLayer, 'click', function(event) {
-//            var content = event.featureData.infoWindowHtml;
-//            var testimonial = document.getElementById('capture');
-//            testimonial.innerHTML = content;
-//        });
+       google.maps.event.addListener(kmlLayer, 'click', function(event) {
+           var content = event.featureData.infoWindowHtml;
+           var testimonial = document.getElementById('capture');
+           testimonial.innerHTML = content;
+       });
     }
 
     /**
@@ -104,11 +104,10 @@ var kmlLoader = (function() {
             map: map
         };
 
-        var finalOptions = {};
         for(var key in customOptions) {
           if (customOptions.hasOwnProperty(key)) {
               defaultOptions[key] = customOptions[key];
-          };
+          }
         }
 
         var kmlLayer = new google.maps.KmlLayer(defaultOptions);
@@ -156,10 +155,11 @@ var kmlLoader = (function() {
     };
 
     constructor.prototype.loadAll = loadAll;
-    constructor.prototype.addLayer = addKmlLayer;
+    constructor.prototype.addLayer = addLayer;
     constructor.prototype.getLayers = getLayers;
     constructor.prototype.loadSingleLayer = loadSingleLayer;
     constructor.prototype.setEvents = setEvents;
+    constructor.prototype.removeLayer = removeLayer;
     constructor.prototype.clearPreviousLayers = clearPreviousLayers;
 
     return constructor;

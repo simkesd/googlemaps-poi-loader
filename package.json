@@ -1,10 +1,27 @@
 {
-  "name": "googlemaps-poi-loadr",
+  "name": "kml-loader",
   "version": "0.1.0",
+  "description": "",
+  "author": {
+    "name": "Milos Simic",
+    "url": "https://github.com/simkesd"
+  },
+  "main": "dist/kml-loader.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/simkesd/kml-loader"
+  },
+  "bugs": {
+    "url": "https://github.com/simkesd/kml-loader/issues"
+  },
+  "keywords": [
+    "google maps",
+    "kml",
+    "loader"
+  ],
   "devDependencies": {
     "gulp": "^3.8.11",
-    "gulp-remove-code": "^1.0.2",
     "gulp-uglify": "^1.1.0",
-    "qunitjs": "^1.19.0"
-  }
+  },
+  "licence": "MIT"
 }
