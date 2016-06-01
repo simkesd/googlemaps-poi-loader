@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="Gyms" id="Gyms">
+	<SimpleField name="timestamp" type="string"></SimpleField>
+	<SimpleField name="begin" type="string"></SimpleField>
+	<SimpleField name="end" type="string"></SimpleField>
+	<SimpleField name="altitudeMode" type="string"></SimpleField>
+	<SimpleField name="tessellate" type="int"></SimpleField>
+	<SimpleField name="extrude" type="int"></SimpleField>
+	<SimpleField name="visibility" type="int"></SimpleField>
+	<SimpleField name="drawOrder" type="int"></SimpleField>
+	<SimpleField name="icon" type="string"></SimpleField>
+</Schema>
+<Folder><name>Gyms</name>
+  <Placemark>
+	<name>PNT Fitness</name>
+	<ExtendedData><SchemaData schemaUrl="#Gyms">
+		<SimpleData name="tessellate">-1</SimpleData>
+		<SimpleData name="extrude">-1</SimpleData>
+		<SimpleData name="visibility">-1</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-73.95212,40.742631,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Element Fitness</name>
+	<ExtendedData><SchemaData schemaUrl="#Gyms">
+		<SimpleData name="tessellate">-1</SimpleData>
+		<SimpleData name="extrude">-1</SimpleData>
+		<SimpleData name="visibility">-1</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-73.951894,40.743899,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>CrossFit LIC</name>
+	<ExtendedData><SchemaData schemaUrl="#Gyms">
+		<SimpleData name="tessellate">-1</SimpleData>
+		<SimpleData name="extrude">-1</SimpleData>
+		<SimpleData name="visibility">-1</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-73.947298,40.749756,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Long Island City YMCA</name>
+	<ExtendedData><SchemaData schemaUrl="#Gyms">
+		<SimpleData name="tessellate">-1</SimpleData>
+		<SimpleData name="extrude">-1</SimpleData>
+		<SimpleData name="visibility">-1</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-73.93227,40.745135,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>CityView Raquet Club</name>
+	<ExtendedData><SchemaData schemaUrl="#Gyms">
+		<SimpleData name="tessellate">-1</SimpleData>
+		<SimpleData name="extrude">-1</SimpleData>
+		<SimpleData name="visibility">-1</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-73.93272,40.745354,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Astoria Complex Catering Hall</name>
+	<ExtendedData><SchemaData schemaUrl="#Gyms">
+		<SimpleData name="tessellate">-1</SimpleData>
+		<SimpleData name="extrude">-1</SimpleData>
+		<SimpleData name="visibility">-1</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-73.926525,40.746625,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>New York Sports Clubs</name>
+	<ExtendedData><SchemaData schemaUrl="#Gyms">
+		<SimpleData name="tessellate">-1</SimpleData>
+		<SimpleData name="extrude">-1</SimpleData>
+		<SimpleData name="visibility">-1</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-73.925756,40.744654,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Phyzique</name>
+	<ExtendedData><SchemaData schemaUrl="#Gyms">
+		<SimpleData name="tessellate">-1</SimpleData>
+		<SimpleData name="extrude">-1</SimpleData>
+		<SimpleData name="visibility">-1</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-73.914881,40.744064,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>The Gym Park</name>
+	<ExtendedData><SchemaData schemaUrl="#Gyms">
+		<SimpleData name="tessellate">-1</SimpleData>
+		<SimpleData name="extrude">-1</SimpleData>
+		<SimpleData name="visibility">-1</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-73.957966,40.727844,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>OTOM Gym</name>
+	<ExtendedData><SchemaData schemaUrl="#Gyms">
+		<SimpleData name="tessellate">-1</SimpleData>
+		<SimpleData name="extrude">-1</SimpleData>
+		<SimpleData name="visibility">-1</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-73.953976,40.728029,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Planet Tanz</name>
+	<ExtendedData><SchemaData schemaUrl="#Gyms">
+		<SimpleData name="tessellate">-1</SimpleData>
+		<SimpleData name="extrude">-1</SimpleData>
+		<SimpleData name="visibility">-1</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-73.953874,40.728078,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>CrossFit Bell</name>
+	<ExtendedData><SchemaData schemaUrl="#Gyms">
+		<SimpleData name="tessellate">-1</SimpleData>
+		<SimpleData name="extrude">-1</SimpleData>
+		<SimpleData name="visibility">-1</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-73.929484,40.753126,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Life Health &amp; Fitness</name>
+	<ExtendedData><SchemaData schemaUrl="#Gyms">
+		<SimpleData name="tessellate">-1</SimpleData>
+		<SimpleData name="extrude">-1</SimpleData>
+		<SimpleData name="visibility">-1</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-73.923223,40.755932,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Lucille Roberts</name>
+	<ExtendedData><SchemaData schemaUrl="#Gyms">
+		<SimpleData name="tessellate">-1</SimpleData>
+		<SimpleData name="extrude">-1</SimpleData>
+		<SimpleData name="visibility">-1</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-73.920396,40.757558,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>The Art of Fitness</name>
+	<ExtendedData><SchemaData schemaUrl="#Gyms">
+		<SimpleData name="tessellate">-1</SimpleData>
+		<SimpleData name="extrude">-1</SimpleData>
+		<SimpleData name="visibility">-1</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-73.919835,40.758244,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Club Fitness New York</name>
+	<ExtendedData><SchemaData schemaUrl="#Gyms">
+		<SimpleData name="tessellate">-1</SimpleData>
+		<SimpleData name="extrude">-1</SimpleData>
+		<SimpleData name="visibility">-1</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-73.924653,40.761962,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Planet Fitness</name>
+	<ExtendedData><SchemaData schemaUrl="#Gyms">
+		<SimpleData name="tessellate">-1</SimpleData>
+		<SimpleData name="extrude">-1</SimpleData>
+		<SimpleData name="visibility">-1</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-73.91555,40.762876,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Moon S. Lee Evolution Martial Arts</name>
+	<ExtendedData><SchemaData schemaUrl="#Gyms">
+		<SimpleData name="tessellate">-1</SimpleData>
+		<SimpleData name="extrude">-1</SimpleData>
+		<SimpleData name="visibility">-1</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-73.916399,40.757595,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Retro Fitness</name>
+	<ExtendedData><SchemaData schemaUrl="#Gyms">
+		<SimpleData name="tessellate">-1</SimpleData>
+		<SimpleData name="extrude">-1</SimpleData>
+		<SimpleData name="visibility">-1</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-73.912775,40.754796,0</coordinates></Point>
+  </Placemark>
+</Folder>
+</Document></kml>

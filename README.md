@@ -1,6 +1,5 @@
 # KML loader
 Library that helps you load your Points Of Interests in kml format on your google map.
-I decided to test my knowledge of javascript and I've tried to make a library with some basic options.
 
 For the demo you can visit [Demo Page](http://simkesd.github.io/kml-loader/demo.html).
 ### Usage
