@@ -3,11 +3,11 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Googlemaps-poi-loader by simkesd</title>
+    <title>kml-loader by simkesd</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -15,88 +15,144 @@
   <body>
     <div class="wrapper">
       <header>
-        <h1>Googlemaps-poi-loader</h1>
+        <h1>kml-loader</h1>
         <p>Library that helps you load your Points Of Interests on google map.</p>
 
-        <p class="view"><a href="https://github.com/simkesd/googlemaps-poi-loader">View the Project on GitHub <small>simkesd/googlemaps-poi-loader</small></a></p>
+        <p class="view"><a href="https://github.com/simkesd/kml-loader">View the Project on GitHub <small>simkesd/kml-loader</small></a></p>
 
 
         <ul>
-          <li><a href="https://github.com/simkesd/googlemaps-poi-loader/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/simkesd/googlemaps-poi-loader/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/simkesd/googlemaps-poi-loader">View On <strong>GitHub</strong></a></li>
+          <li><a href="https://github.com/simkesd/kml-loader/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/simkesd/kml-loader/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/simkesd/kml-loader">View On <strong>GitHub</strong></a></li>
         </ul>
       </header>
       <section>
         <h1>
-<a id="googlemaps-poi-loader" class="anchor" href="#googlemaps-poi-loader" aria-hidden="true"><span class="octicon octicon-link"></span></a>googlemaps-poi-loader</h1>
+<a id="kml-loader" class="anchor" href="#kml-loader" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>KML loader</h1>
 
-<p>Small and simple Library that helps you load your Points Of Interests in kml format on your google map.
-I decided to test my knowledge of javascript and I've tried to make a library with some basic options.
-Google maps poi loader may be of use for you if you have a list of POIs you want to load to your map, 
-and add some functionalities to that list such as loading only POIs of clicked element.</p>
+<p>Library that helps you load locations from KML files on your google map.</p>
+
+<p>For the demo you can visit <a href="http://simkesd.github.io/kml-loader/demo.html">Demo Page</a>.</p>
 
 <h3>
-<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h3>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h3>
 
-<p>You must load jquery, in my example I am using version 2.1.3.</p>
+<p>I will explain how this works, but using it is pretty straight forward. Just check out the source code for <a href="https://github.com/simkesd/kml-loader/blob/master/examples/index.html">example</a>.
+The important file here is <code>dist/kml-loader.js</code>. After you include it you can then create an instance of <code>kmlLoader</code> object. <code>kmlLoader</code> has 3 parameters.</p>
+
+<ol>
+<li>google map object (instance of <code>google.maps.Map(elem)</code>);</li>
+<li>array of elements containing <code>data-layer-url</code> attribute based on which <code>kmlLoader</code> will generate pins on google map. (<code>document.querySelectorAll('ul.filters li')</code>)</li>
+<li>object containing additional, non-required options</li>
+</ol>
+
+<pre><code>{
+        filterClickCallback: function(){}, // fired after one of DOM elements passed as second param is clicked
+        setEvents: true, // if true sets events which control what happens on filter click
+        showOnLoad: true, // load all KMLs on page load
+        onLayerChangeKeepState: true // if true - keeps state, if false - only one layer at a time can be showed
+}
+</code></pre>
 
 <h5>
-<a id="html-structure" class="anchor" href="#html-structure" aria-hidden="true"><span class="octicon octicon-link"></span></a>HTML structure</h5>
+<a id="html-structure" class="anchor" href="#html-structure" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>HTML structure</h5>
 
-<div class="highlight highlight-HTML"><pre>&lt;<span class="pl-ent">ul</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>filters<span class="pl-pds">"</span></span>&gt;
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">ul</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>filters<span class="pl-pds">"</span></span>&gt;
     &lt;<span class="pl-ent">li</span> <span class="pl-e">data-layer-url</span>=<span class="pl-s"><span class="pl-pds">"</span>http://happyfist.co/pois/pois/POI/gyms.kml<span class="pl-pds">"</span></span>&gt;&lt;<span class="pl-ent">a</span>&gt;Gyms&lt;/<span class="pl-ent">a</span>&gt;&lt;/<span class="pl-ent">li</span>&gt;
     &lt;<span class="pl-ent">li</span> <span class="pl-e">data-layer-url</span>=<span class="pl-s"><span class="pl-pds">"</span>http://happyfist.co/pois/pois/POI/hotels.kml<span class="pl-pds">"</span></span>&gt;&lt;<span class="pl-ent">a</span>&gt;Hotels&lt;/<span class="pl-ent">a</span>&gt;&lt;/<span class="pl-ent">li</span>&gt;
 &lt;/<span class="pl-ent">ul</span>&gt;
 
 &lt;<span class="pl-ent">div</span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>map-canvas<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">div</span>&gt;
-</pre></div>
+
+&lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/javascript<span class="pl-pds">"</span></span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>https://maps.googleapis.com/maps/api/js&gt;&lt;/script&gt;</span>
+<span class="pl-s">&lt;script type=<span class="pl-pds">"</span></span><span class="pl-e">text</span>/<span class="pl-e">javascript</span><span class="pl-s"><span class="pl-pds">"</span> src=<span class="pl-pds">"</span></span>../<span class="pl-e">dist</span>/<span class="pl-e">kml-loader</span>.<span class="pl-e">js</span><span class="pl-s"><span class="pl-pds">"</span>&gt;&lt;/script&gt;</span></pre></div>
 
 <p>Library uses data-layer-uri to get the location of your KML files.
-=&gt; NOTE: Location of your KML files must be public, as google needs to read data from them so it could show them on the map.</p>
+=&gt; NOTE: Location of your KML files must be on server with public address, as google needs to read data from them so it could show them on the map.</p>
 
 <h5>
-<a id="javascript" class="anchor" href="#javascript" aria-hidden="true"><span class="octicon octicon-link"></span></a>Javascript</h5>
+<a id="javascript" class="anchor" href="#javascript" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Javascript</h5>
 
-<p>You must initialize map by yourself, and pass reference to the map to constructor of library. So for an exmaple you can do this:</p>
+<p>You must initialize map by yourself, and pass reference to the map into constructor of library. So for an example you can do this:</p>
 
-<div class="highlight highlight-javascript"><pre><span class="pl-k">var</span> map;
-        <span class="pl-k">function</span> <span class="pl-en">initialize</span>() {
-            map <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">google.maps</span>.Map(<span class="pl-c1">document</span>.<span class="pl-c1">getElementById</span>(<span class="pl-s"><span class="pl-pds">'</span>map-canvas<span class="pl-pds">'</span></span>), {
-                center<span class="pl-k">:</span> <span class="pl-k">new</span> <span class="pl-en">google.maps</span>.LatLng(<span class="pl-c1">40.751077</span>, <span class="pl-k">-</span><span class="pl-c1">73.945135</span>),
-                zoom<span class="pl-k">:</span> <span class="pl-c1">13</span>,
-                mapTypeId<span class="pl-k">:</span> google.maps.MapTypeId.TERRAIN
-            });
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> map;
+<span class="pl-k">var</span> kl;
+<span class="pl-k">function</span> <span class="pl-en">initialize</span>() {
+    map <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">google.maps</span>.<span class="pl-en">Map</span>(<span class="pl-c1">document</span>.<span class="pl-c1">getElementById</span>(<span class="pl-s"><span class="pl-pds">'</span>map-canvas<span class="pl-pds">'</span></span>), {
+        center<span class="pl-k">:</span> <span class="pl-k">new</span> <span class="pl-en">google.maps</span>.<span class="pl-en">LatLng</span>(<span class="pl-c1">40.751077</span>, <span class="pl-k">-</span><span class="pl-c1">73.945135</span>),
+        zoom<span class="pl-k">:</span> <span class="pl-c1">13</span>,
+        mapTypeId<span class="pl-k">:</span> <span class="pl-smi">google</span>.<span class="pl-smi">maps</span>.<span class="pl-smi">MapTypeId</span>.<span class="pl-c1">TERRAIN</span>
+    });
 
-            <span class="pl-k">var</span> gm <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">gMap</span>({
-                map<span class="pl-k">:</span> map,
-                filters<span class="pl-k">:</span> $(<span class="pl-s"><span class="pl-pds">'</span>ul.filters li<span class="pl-pds">'</span></span>),
-                <span class="pl-en">filterClickCallback</span>: <span class="pl-k">function</span>() {
-                    <span class="pl-en">console</span><span class="pl-c1">.log</span>(<span class="pl-s"><span class="pl-pds">'</span>filterClickCallback<span class="pl-pds">'</span></span>);
-                }
-            });
+    kl <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">kmlLoader</span>(map, <span class="pl-c1">document</span>.<span class="pl-en">querySelectorAll</span>(<span class="pl-s"><span class="pl-pds">'</span>ul.filters li<span class="pl-pds">'</span></span>), {
+        <span class="pl-en">filterClickCallback</span><span class="pl-k">:</span> <span class="pl-k">function</span>() {
+            <span class="pl-en">console</span>.<span class="pl-c1">info</span>(<span class="pl-s"><span class="pl-pds">'</span>filterClickCallback called!<span class="pl-pds">'</span></span>);
+        },
+        setEvents<span class="pl-k">:</span> <span class="pl-c1">true</span>,
+        showOnLoad<span class="pl-k">:</span> <span class="pl-c1">true</span>,
+        onLayerChangeKeepState<span class="pl-k">:</span> <span class="pl-c1">true</span>
+    });
+}
 
-            gm.loadAll();
-        }
 
-        google.maps.<span class="pl-c1">event</span>.addDomListener(<span class="pl-c1">window</span>, <span class="pl-s"><span class="pl-pds">'</span>load<span class="pl-pds">'</span></span>, initialize);</pre></div>
+<span class="pl-smi">google</span>.<span class="pl-smi">maps</span>.<span class="pl-c1">event</span>.<span class="pl-en">addDomListener</span>(<span class="pl-c1">window</span>, <span class="pl-s"><span class="pl-pds">'</span>load<span class="pl-pds">'</span></span>, initialize);</pre></div>
 
 <p>This portion of code will create initialize a google map for you (and set some options also, so you can actually see POIs)
-Part of this code that we are particularly interested is next one: </p>
+Part of this code that we are particularly interested is next one:</p>
 
-<div class="highlight highlight-javascript"><pre><span class="pl-k">var</span> gm <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">gMap</span>({
-                map<span class="pl-k">:</span> map,
-                filters<span class="pl-k">:</span> $(<span class="pl-s"><span class="pl-pds">'</span>ul.filters li<span class="pl-pds">'</span></span>),
-                <span class="pl-en">filterClickCallback</span>: <span class="pl-k">function</span>() {
-                    <span class="pl-en">console</span><span class="pl-c1">.log</span>(<span class="pl-s"><span class="pl-pds">'</span>filterClickCallback<span class="pl-pds">'</span></span>);
-                }
-            });
-
-            gm.loadAll();</pre></div>
+<div class="highlight highlight-source-js"><pre>kl <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">kmlLoader</span>(map, <span class="pl-c1">document</span>.<span class="pl-en">querySelectorAll</span>(<span class="pl-s"><span class="pl-pds">'</span>ul.filters li<span class="pl-pds">'</span></span>), {
+        <span class="pl-en">filterClickCallback</span><span class="pl-k">:</span> <span class="pl-k">function</span>() {
+            <span class="pl-en">console</span>.<span class="pl-c1">info</span>(<span class="pl-s"><span class="pl-pds">'</span>filterClickCallback called!<span class="pl-pds">'</span></span>);
+        },
+        setEvents<span class="pl-k">:</span> <span class="pl-c1">true</span>,
+        showOnLoad<span class="pl-k">:</span> <span class="pl-c1">true</span>,
+        onLayerChangeKeepState<span class="pl-k">:</span> <span class="pl-c1">true</span>
+    });</pre></div>
 
 <p>This code is initializing our library by sending required parameters to constructor. So, required parameters are
     * Instance of google map object and
-    * Array of DOM elements containing data-layer-url attribute. Its content should be exact location of your KML file.</p>
+    * Array of DOM elements containing data-layer-url attribute. Its content should be exact location of your KML file.
+Third param is non required options object. </p>
+
+<h3>
+<a id="additional-info" class="anchor" href="#additional-info" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Additional info</h3>
+
+<h5>
+<a id="kmlloadergooglemap-domelements-" class="anchor" href="#kmlloadergooglemap-domelements-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>kmlLoader(googleMap, domElements, {})</h5>
+
+<p>Initializes the library by setting some internals and setting events on provided DOM elements. This allows you to click
+provided DOM elements and to load only clicked kml layer to your map.</p>
+
+<h5>
+<a id="loadallcustomoptions" class="anchor" href="#loadallcustomoptions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>loadAll(customOptions)</h5>
+
+<p>Loads all kml layers from DOM elements you passed through data-layer-url to constructor,
+<code>param {object} object with layer options</code> <a href="https://developers.google.com/maps/documentation/javascript/examples/layer-kml">details</a></p>
+
+<h5>
+<a id="getlayers" class="anchor" href="#getlayers" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>getLayers()</h5>
+
+<p>Returns all kml layers currently loaded to map</p>
+
+<h5>
+<a id="addlayersrc-customoptions" class="anchor" href="#addlayersrc-customoptions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>addLayer(src, customOptions)</h5>
+
+<p>Adds a KMLLayer based on the URL and options passed
+<code>param {string} src A URL for a KML file.</code>
+<code>param {object} object with layer options</code> <a href="https://developers.google.com/maps/documentation/javascript/examples/layer-kml">details</a></p>
+
+<h5>
+<a id="loadsinglelayersrc-customoptions" class="anchor" href="#loadsinglelayersrc-customoptions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>loadSingleLayer(src, customOptions)</h5>
+
+<p>Loads single layer to google map, and deletes all previously set layers.
+<code>param {string} src A URL for a KML file.</code>
+<code>param {object} object with layer options</code> <a href="https://developers.google.com/maps/documentation/javascript/examples/layer-kml">details</a></p>
+
+<h5>
+<a id="clearpreviouslayers" class="anchor" href="#clearpreviouslayers" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>clearPreviousLayers()</h5>
+
+<p>Clears your google map from previously set layers.</p>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/simkesd">simkesd</a></p>
@@ -104,16 +160,16 @@ Part of this code that we are particularly interested is next one: </p>
       </footer>
     </div>
     <script src="javascripts/scale.fix.js"></script>
-    <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-        ga('create', 'UA-47470142-5', 'auto');
-        ga('send', 'pageview');
-
-    </script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("&lt;script&gt;   (function(i,s,o,g,r,a,m){i[&#39;GoogleAnalyticsObject&#39;]=r;i[r]=i[r]||function(){   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)   })(window,document,&#39;script&#39;,&#39;//www.google-analytics.com/analytics.js&#39;,&#39;ga&#39;);    ga(&#39;create&#39;, &#39;UA-47470142-5&#39;, &#39;auto&#39;);   ga(&#39;send&#39;, &#39;pageview&#39;);  &lt;/script&gt;");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
 
   </body>
 </html>
