@@ -70,9 +70,9 @@ var kmlLoader = (function() {
      */
     function clearPreviousLayers() {
       for(var i = 0; i < self.kmlLayers.length; i++) {
-          kmlLayers[i].layerInstance.setMap(null);
+          self.kmlLayers[i].layerInstance.setMap(null);
       }
-        constructor.prototype.kmlLayers = [];
+        self.kmlLayers = [];
     }
 
     /**
@@ -142,7 +142,7 @@ var kmlLoader = (function() {
         self.map = map;
         self.filters = filters;
         self.filterClickCallback = options.filterClickCallback;
-        self.onLayerChangeKeepState = options.onLayerChangeKeepState || onLayerChangeKeepState;
+        self.onLayerChangeKeepState = options.onLayerChangeKeepState || self.onLayerChangeKeepState;
         self.showOnLoad = options.showOnLoad || showOnLoad;
 
         if(options.setEvents === true) {
