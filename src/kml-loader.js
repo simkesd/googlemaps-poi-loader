@@ -101,7 +101,7 @@ var kmlLoader = (function() {
         var defaultOptions = {
             url: src,
             preserveViewport: true,
-            map: map
+            map: self.map
         };
 
         for(var key in customOptions) {
